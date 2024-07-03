@@ -14,3 +14,14 @@ class Ingredient(BaseModel):
     fullname:str
     Almacen:str
     Cantidad:str
+
+class Platillos(BaseModel):
+    fullname : str
+    MetodoPreparacion : str
+    Ingredientes : str
+    Menu : str
+    Precio : str
+
+class Menu(BaseModel):
+    fullname : str
+    Platos : str

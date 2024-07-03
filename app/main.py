@@ -5,6 +5,7 @@ from app.infrastructure.database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from app.api import routes
 from app.api import auth
+from app.api import Dish_Menu
 
 
 def get_application():
@@ -15,6 +16,8 @@ def get_application():
 
     app.include_router(auth.router)
     app.include_router(routes.router)
+    app.include_router(Dish_Menu.router)
+
    
     
     return app

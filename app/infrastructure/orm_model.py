@@ -23,6 +23,22 @@ class Ingredients(Base):
     Almacen = Column(String, index= True)
     Cantidad = Column(String, index= True)
 
+class Platillos(Base):
+    __tablename__ ='Platillos'
+    id = Column(Integer, primary_key=True, index= True)
+    fullname = Column(String, index=True)
+    MetodoPreparacion = Column(String, index= True)
+    Ingredientes = Column(String, index= True)
+    Menu = Column(String, index= True)
+    Precio = Column(String, index= True)
+
+class Menu(Base):
+    __tablename__ ='Menu'
+    id = Column(Integer, primary_key=True, index= True)
+    fullname = Column(String, index=True)
+    Platos = Column(String, index=True)
+
+
 metadata = MetaData()
 Base.metadata.create_all(bind=engine)
 
