@@ -36,6 +36,7 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
+
 @router.post("/", status_code= status.HTTP_201_CREATED)
 async def create_user(db: db_dependency, create_user_request: User):
     create_user_model = orm_model.Users(email= create_user_request.email, 
@@ -71,3 +72,24 @@ def create_access_token(username:str, user_id:int, expires_delta:timedelta):
     expires = datetime.utcnow() + expires_delta
     encode.update({'exp':expires})
     return jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
+
+async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get('sub')
+        user_id: int = payload.get('id')
+        if username is None or user_id is None:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='could not validate user')
+        return {'Email': username, 'id': user_id}
+    except JWTError:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user')
+    
+user_dependency = Annotated[Session, Depends(get_current_user)]
+
+
+@router.get("/Login", status_code=status.HTTP_200_OK)
+async def user(user: user_dependency, db:db_dependency):
+    if user is  None:
+        raise HTTPException(status_code=401, detail='Authentication Failed')
+    return{"User":user}
+
