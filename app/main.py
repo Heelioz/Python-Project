@@ -13,15 +13,12 @@ def get_application():
         title="Aplicación Gestion de Restaurants",
         version="1.0.0"
     )
-
+    
     app.include_router(auth.router)
     app.include_router(routes.router)
     app.include_router(Dish_Menu.router)
 
-   
-    
     return app
-
 
 app = get_application()
 

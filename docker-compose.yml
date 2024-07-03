@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5433:5432"
+    volumes:
+      - .:/app
+    environment:
+      - DATABASE_URL='postgresql://postgres:17101717@localhost:5433/Restaurant_API_DB'  # Use environment variable for URL
+  postgres:
+    image: postgres:latest  # Use official Postgres image
+    environment:
+      POSTGRES_USER: postgres  # Set username (assuming it's 'postgres')
+      POSTGRES_PASSWORD: 17101717  # Set password (replace with actual password)
+      POSTGRES_DB: Restaurant_API_DB  # Set database name
+
+volumes:
+  postgres_data:  # Persistent volume for Postgres data
+
+# Link the web service to the Postgres container
+web:
+  depends_on:
+    - postgres
