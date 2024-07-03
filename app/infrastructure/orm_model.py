@@ -16,6 +16,13 @@ class Users(Base):
     fullname = Column(String, index=True)
     rol = Column(String, index= True)
 
+class Ingredients(Base):
+    __tablename__ ='Ingredientes'
+    id = Column(Integer, primary_key=True, index= True)
+    fullname = Column(String, index=True)
+    Almacen = Column(String, index= True)
+    Cantidad = Column(String, index= True)
+
 metadata = MetaData()
 Base.metadata.create_all(bind=engine)
 

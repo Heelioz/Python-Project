@@ -14,7 +14,7 @@ from app.infrastructure.database import engine, SessionLocal
 
 router = APIRouter(
     prefix='/auth',
-    tags=['auth']
+    tags=['Autenticacion JWT']
 )
 
 SECRET_KEY= 'c1e3bfdf347f294e25553b0a918fb053b2fd6c858e039865e7fbf2e3b76698b1'

@@ -9,7 +9,7 @@ from app.api import auth
 
 def get_application():
     app = FastAPI(
-        title="Aplicación Demo de DDD",
+        title="Aplicación Gestion de Restaurants",
         version="1.0.0"
     )
 
